@@ -8,54 +8,50 @@ constructor(props){
 
 
   this.state = {
-    posts:[]
+    doctors:[]
   };
 
 }
-
 
 componentDidMount(){
   this.retrivePosts();
 }
 
-
 retrivePosts(){
-  axios.get("/posts").then(res =>{
+  axios.get("http://localhost:8000/doctor/").then(res =>{
   if(res.data.success){
     this.setState({
-      posts:res.data.existingPosts
+        doctors:res.data.existingDoctor
     });
 
-    console.log(this.state.posts)
-  }
-
-    
+    console.log(this.state.doctors)
+    }
   });
 }
 
-
 onDelete = (id)=>{
 
-  axios.delete(`/post/delete/${id}`).then((res)=>{
+  axios.delete(`http://localhost:8000/doctor/delete/${id}`).then((res)=>{
+      console.log("DI :" +id)
     alert("Delete Successfully");
     this.retrivePosts();
   })
 
 }
 
-filterData(posts, searchKey) {
-  const result = posts.filter((post) => 
+filterData(doctors, searchKey) {
+  const result = doctors.filter((post) => 
     post.topic.toLowerCase().includes(searchKey) || 
     post.topic.toUpperCase().includes(searchKey)
   ) 
-  this.setState({posts:result})
+  this.setState({doctors:result})
 }
 
 handleSearchArea= (e) =>{
   const searchkey = e.currentTarget.value;
 
   console.log(e.currentTarget.value);
-  axios.get("/posts").then(res =>{
+  axios.get("http://localhost:8000/doctor/").then(res =>{
     if(res.data.success){
         this.filterData(res.data.existingPosts,searchkey)
        }
@@ -68,7 +64,7 @@ handleSearchArea= (e) =>{
       <div className="container">
         <div className="row">
           <div className="col-lg-9 mt-2 mb-2">
-        <h4>All Posts</h4>
+        <h4>All Doctor</h4>
         </div>
         <div className="col-lg-3 mt-2 mb-2">
           <input 
@@ -86,48 +82,47 @@ handleSearchArea= (e) =>{
           <thead>
             <tr>
               <th scope = "col">#</th>
-              <th scope = "col">Topic</th>
-              <th scope = "col">Description</th>
-              <th scope = "col">Post Category</th>
-              <th scope = "col">Date</th>
-              <th scope = "col">Action</th>
-
+              <th scope = "col">Employee ID</th>
+              <th scope = "col">First Name</th>
+              <th scope = "col">Last Name</th>
+              <th scope = "col">Mobile Number</th>
+              <th scope = "col">NIC</th>
+              <th scope = "col">Email</th>
             </tr>
           </thead>
           <tbody>
 
-
           </tbody>
-          {this.state.posts.map((posts,index) =>(
+          {this.state.doctors.map((doctors,index) =>(
             <tr key={index}>
               <th scope = "row">{index+1}</th>
               <td>
-                <a href={`/post/${posts.id}`} style={{textDecoration:'none'}}>
-                  {posts.topic}
-                  </a>
-                  </td>
-              <td>{posts.description}</td>
-              <td>{posts.postCategory}</td>
-              <td>{posts.date}</td>
+                <a href={`/post/${doctors._id}`} style={{textDecoration:'none'}}>
+                  {doctors.employeeId}
+                </a>
+              </td>
+              <td>{doctors.firstName}</td>
+              <td>{doctors.lastName}</td>
+              <td>{doctors.mobileNumber}</td>
+              <td>{doctors.NIC}</td>
+              <td>{doctors.email}</td>
               <td>
 
-              < a className= "btn btn-warning" href="#" >
+              < a className = "btn btn-warning" href={`/updateDoctor/${doctors._id}`} >
                     <i className ="fas fa-edit"></i> &nbsp;Edit
                   </a>
                 &nbsp;
-                <a className= "btn btn-danger" href="#" onClick={()=>this.onDelete(posts._id)}>
+                <a className= "btn btn-danger" href="#" onClick={()=>this.onDelete(doctors._id)}>
                     <i className="far fa-trash-alt" style={{color: "black"}}>&nbsp;Delete</i>
                 </a>
-
               </td>
-
             </tr>
 
           ))}
 
         </table>
 
-        <button className="btn btn-success"><a href="/add" style={{textDecoration:'none',color:'white'}}>Create New Post</a></button>
+        <button className="btn btn-success"><a href="/addDoctor" style={{textDecoration:'none',color:'white'}}>Create New Doctor</a></button>
         
       </div>
     )

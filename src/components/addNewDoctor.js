@@ -48,6 +48,7 @@ export default class addNewDoctor extends Component{
 
     axios.post("http://localhost:8000/doctor/save/",data).then((res)=>{
       if(res.data.success){
+        alert("Doctor Added Successfully")
         this.setState(
           {
             employeeId : "",
@@ -88,7 +89,7 @@ export default class addNewDoctor extends Component{
               name="firstName"
               placeholder="Enter First Name"
               value={this.state.firstName}
-              onChange={this.handleInputChange}/>
+              onChange={this.handleInputChange} required/>
             </div>
 
             <div className="form-group" style={{marginBottom:'15px'}}>
@@ -98,7 +99,7 @@ export default class addNewDoctor extends Component{
               name="middleName"
               placeholder="Enter Middle Name"
               value={this.state.middleName}
-              onChange={this.handleInputChange}/>
+              onChange={this.handleInputChange} required/>
             </div>
 
             <div className="form-group" style={{marginBottom:'15px'}}>
@@ -108,7 +109,7 @@ export default class addNewDoctor extends Component{
               name="lastName"
               placeholder="Enter Last Name"
               value={this.state.lastName}
-              onChange={this.handleInputChange}/>
+              onChange={this.handleInputChange} required/>
             </div>
 
             <div className="form-group" style={{marginBottom:'15px'}}>
@@ -118,7 +119,7 @@ export default class addNewDoctor extends Component{
               name="mobileNumber"
               placeholder="Enter Mobile Number"
               value={this.state.mobileNumber}
-              onChange={this.handleInputChange}/>
+              onChange={this.handleInputChange} required/>
             </div>
 
             <div className="form-group" style={{marginBottom:'15px'}}>
@@ -128,7 +129,7 @@ export default class addNewDoctor extends Component{
               name="NIC"
               placeholder="Enter National Identicard Number"
               value={this.state.NIC}
-              onChange={this.handleInputChange}/>
+              onChange={this.handleInputChange} required/>
             </div>
 
             <div className="form-group" style={{marginBottom:'15px'}}>
@@ -138,7 +139,7 @@ export default class addNewDoctor extends Component{
               name="date"
               placeholder="Enter Birth Day"
               value={this.state.DOB}
-              onChange={this.handleInputChange}/> 
+              onChange={this.handleInputChange} required/> 
             </div>
 
             <div className="form-group" style={{marginBottom:'15px'}}>
@@ -148,7 +149,7 @@ export default class addNewDoctor extends Component{
               name="email"
               placeholder="Enter Email Address"
               value={this.state.email}
-              onChange={this.handleInputChange}/>
+              onChange={this.handleInputChange} required/>
             </div>
           
             <button className="btn btn-success" type="submit" style={{marginTop:'15px'}} onClick={this.onSubmit}>

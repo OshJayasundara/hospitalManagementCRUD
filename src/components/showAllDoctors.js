@@ -40,9 +40,13 @@ onDelete = (id)=>{
 }
 
 filterData(doctors, searchKey) {
-  const result = doctors.filter((post) => 
-    post.topic.toLowerCase().includes(searchKey) || 
-    post.topic.toUpperCase().includes(searchKey)
+  const result = doctors.filter((doctor) => 
+    doctor.NIC.toLowerCase().includes(searchKey) || 
+    doctor.NIC.toUpperCase().includes(searchKey) ||
+    doctor.firstName.toLowerCase().includes(searchKey) ||
+    doctor.firstName.toUpperCase().includes(searchKey) ||
+    doctor.employeeId.toLowerCase().includes(searchKey) || 
+    doctor.employeeId.toUpperCase().includes(searchKey) 
   ) 
   this.setState({doctors:result})
 }
@@ -53,7 +57,7 @@ handleSearchArea= (e) =>{
   console.log(e.currentTarget.value);
   axios.get("http://localhost:8000/doctor/").then(res =>{
     if(res.data.success){
-        this.filterData(res.data.existingPosts,searchkey)
+        this.filterData(res.data.existingDoctor,searchkey)
        }
     });
 
@@ -64,7 +68,7 @@ handleSearchArea= (e) =>{
       <div className="container">
         <div className="row">
           <div className="col-lg-9 mt-2 mb-2">
-        <h4>All Doctor</h4>
+        <h4>All existing Doctors (Online)</h4>
         </div>
         <div className="col-lg-3 mt-2 mb-2">
           <input 
@@ -97,7 +101,7 @@ handleSearchArea= (e) =>{
             <tr key={index}>
               <th scope = "row">{index+1}</th>
               <td>
-                <a href={`/post/${doctors._id}`} style={{textDecoration:'none'}}>
+                <a href={`/doctor/${doctors._id}`} style={{textDecoration:'none'}}>
                   {doctors.employeeId}
                 </a>
               </td>

@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import DoctorHome from './components/showAllDoctors';
 import addDoctor from './components/addNewDoctor'
 import updateDoctor from './components/updateDoctor'
+import doctorDetails from './components/doctorDetails'
 
 export default class App extends Component{
   render(){
@@ -26,6 +27,7 @@ export default class App extends Component{
         <Route path="/doctor" exact component={DoctorHome}></Route>
         <Route path="/addDoctor" exact component={addDoctor}></Route>
         <Route path="/updateDoctor/:id" exact component={updateDoctor}></Route>
+        <Route path="/doctor/:id" exact component={doctorDetails}></Route>
 
       </div>
 

@@ -92,7 +92,7 @@ export default class EditPost extends Component{
   render(){
     return(
         <div className="col-md-8 mt-4 mx-auto" >
-        <h1 className="h3 mb-3 front-weight-normal">Update Doctor</h1>
+        <h1 className="h3 mb-3 front-weight-normal">Update Outpatient Doctor Details</h1>
         <from className="needs-validation" noValidate>
 
           <div className="form-group" style={{marginBottom:'15px'}}>
@@ -102,7 +102,8 @@ export default class EditPost extends Component{
             name="employeeId"
             placeholder="Enter Employee ID"
             value={this.state.employeeId}
-            onChange={this.handleInputChange}/>
+            onChange={this.handleInputChange}
+            required/>
           </div>
 
           <div className="form-group" style={{marginBottom:'15px'}}>
@@ -112,7 +113,7 @@ export default class EditPost extends Component{
             name="firstName"
             placeholder="Enter First Name"
             value={this.state.firstName}
-            onChange={this.handleInputChange}/>
+            onChange={this.handleInputChange} required/>
           </div>
 
           <div className="form-group" style={{marginBottom:'15px'}}>
